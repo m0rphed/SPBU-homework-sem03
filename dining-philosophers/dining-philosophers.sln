@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dining-philosophers", "dining-philosophers.csproj", "{7BB6B2C7-7847-4E4F-939D-D238D7A41AFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BB6B2C7-7847-4E4F-939D-D238D7A41AFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BB6B2C7-7847-4E4F-939D-D238D7A41AFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BB6B2C7-7847-4E4F-939D-D238D7A41AFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BB6B2C7-7847-4E4F-939D-D238D7A41AFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
