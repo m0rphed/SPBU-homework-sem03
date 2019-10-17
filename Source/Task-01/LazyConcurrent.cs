@@ -2,47 +2,57 @@
 {
     using System;
 
+    /// <inheritdoc />
     public class LazyConcurrent<T> : ILazy<T>
     {
         /// <summary>
-        /// Computation function
+        /// Computation function.
         /// </summary>
-        private volatile Func<T> supplierFunction;
+        private volatile Func<T> _supplierFunction;
 
         /// <summary>
-        /// Object used by lock
+        /// Object used by lock.
         /// </summary>
-        private object _lockObject = new object();
-        
+        private readonly object _lockObject = new object();
+
         /// <summary>
-        /// If false then <see cref="supplierFunction"/>
-        /// will be called in <see cref="Get"/>
+        /// If false then <see cref="_supplierFunction"/>
+        /// will be called in <see cref="Get"/>.
         /// </summary>
         private volatile bool _isComputed = false;
 
         /// <summary>
-        /// Calculated result of the supplier
+        /// Calculated result of the supplier.
         /// </summary>
-        private T computationResult;
+        private T _computationResult;
 
-        public LazyConcurrent(Func<T> supplier)
-        {
-            supplierFunction = supplier;
-        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LazyConcurrent{T}"/> class.
+        /// </summary>
+        /// <param name="supplier">Calculation providing as an object.</param>
+        public LazyConcurrent(Func<T> supplier) => _supplierFunction = supplier;
 
+        /// <inheritdoc />
         public T Get()
         {
-            if (_isComputed) return computationResult;
+            if (_isComputed)
+            {
+                return _computationResult;
+            }
 
             lock (_lockObject)
             {
-                if (_isComputed) return computationResult;
+                if (_isComputed)
+                {
+                    return _computationResult;
+                }
 
-                computationResult = supplierFunction();
+                _computationResult = _supplierFunction();
+                _supplierFunction = null;
                 _isComputed = true;
             }
 
-            return computationResult;
+            return _computationResult;
         }
     }
 }

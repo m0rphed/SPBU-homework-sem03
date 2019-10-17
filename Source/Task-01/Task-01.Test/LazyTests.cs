@@ -3,7 +3,7 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class LazyTests
+    internal class LazyTests
     {
         [Test]
         public static void CheckIfLazyWorks()

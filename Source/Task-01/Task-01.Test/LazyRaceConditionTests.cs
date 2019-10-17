@@ -1,12 +1,11 @@
-﻿using System;
-
-namespace Task_01.Test
+﻿namespace Task_01.Test
 {
+    using System;
     using System.Threading;
     using NUnit.Framework;
 
     [TestFixture]
-    class LazyRaceConditionTests
+    internal class LazyRaceConditionTests
     {
         [Test]
         public static void CheckIfLazyConcurrentNotAllowsRaces()
@@ -19,7 +18,7 @@ namespace Task_01.Test
 
                 lock (lockObject)
                 {
-                    counter++;
+                    Interlocked.Increment(ref counter);
                 }
 
                 return "expected value";

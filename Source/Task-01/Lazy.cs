@@ -2,27 +2,34 @@
 {
     using System;
 
+    /// <inheritdoc />
     public class Lazy<T> : ILazy<T>
     {
-        private Func<T> supplierFunction;
+        private Func<T> _supplierFunction;
 
-        private bool isComputed = false;
+        private bool _isComputed;
 
-        private T computationResult;
+        private T _computationResult;
 
-        public Lazy(Func<T> supplier)
-        {
-            supplierFunction = supplier;
-        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Lazy{T}"/> class.
+        /// </summary>
+        /// <param name="supplier">Calculation providing as an object.</param>
+        public Lazy(Func<T> supplier) => _supplierFunction = supplier;
 
+        /// <inheritdoc />
         public T Get()
         {
-            if (isComputed) return computationResult;
+            if (_isComputed)
+            {
+                return _computationResult;
+            }
 
-            computationResult = supplierFunction();
-            isComputed = true;
+            _computationResult = _supplierFunction();
+            _supplierFunction = null;
+            _isComputed = true;
 
-            return computationResult;
+            return _computationResult;
         }
     }
 }
